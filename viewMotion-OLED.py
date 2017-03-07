@@ -35,14 +35,6 @@ parser = optparse.OptionParser(usage=usage, description=__doc__)
 
 parser.add_option('-p', '--print', action="store_true",
                    help='Print Debug Information', default=False, dest='debug')
-
-#parser.add_option('-y', '--year', action="store",
-#                   help='Year to pull down information', dest='year', default=today.strftime('%Y'))
-#parser.add_option('-m', '--month', action="store",
-#                   help='Month to pull down information', dest='month', default=today.strftime('%m'))
-#parser.add_option('-d', '--day', action="store",
-#                   help='Day to pull down information', dest='day', default=today.strftime('%d'))
-
 parser.add_option('-v', '--velocity', action="store",
                    help='This is the speed (in px) the animation moves (default: -1 = 128 moves/cycle) ', dest='velocity', default=-1)
 parser.add_option('-c', '--cycle', action="store",
