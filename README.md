@@ -30,9 +30,11 @@ Usage: viewMotion-OLED.py [options] file
 
 Options:
 
-  -h, --help            show this help message and exit
+  -h, --help            
+                        Show this help message and exit
 
-  -p, --print           Print Debug Information
+  -p, --print           
+                        Print Debug Information
 
   -v VELOCITY, --velocity=VELOCITY
 
@@ -46,4 +48,7 @@ Options:
 
                         Speed in Seconds that each cycle stalls for (default: 1)
 
+  -d FILE, --dbconfig=FILE
+                        
+                        Location of the Database config file for the MySQL credentials (default: db_config.ini)
 
