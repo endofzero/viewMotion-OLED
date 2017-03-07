@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Version 1.0
+# Version 1.1
 from __future__ import division
 import math
 import time
@@ -13,6 +13,7 @@ import MySQLdb
 import os
 import datetime
 import gc
+import ConfigParser
 
 from PIL import Image
 from PIL import ImageFont
@@ -20,6 +21,8 @@ from PIL import ImageDraw
 from subprocess import PIPE, Popen
 from array import array
 from datetime import timedelta
+
+db_settings = ConfigParser.ConfigParser()
 
 
 usage = "usage: %prog [options] file"
@@ -46,6 +49,8 @@ parser.add_option('-c', '--cycle', action="store",
                    help='This is the number of animation cycles before the graphics flip (to prevent burn-in)', dest='cycle', default=2)
 parser.add_option('-s', '--speed', action="store",
                    help='Speed in Seconds that each cycle stalls for (default: 1)', dest='speed', default=1)
+parser.add_option('-d', '--dbconfig', action="store",
+                   help='Location of the ini file storing the credentials to connect to the MySQL database (default: db_config.ini)', dest='dbconfig', default='db_config.ini')
 
 options, args = parser.parse_args()
 
@@ -62,8 +67,18 @@ if DEBUG:
     print 'Options: ' + str(options)
     print 'Args: ' + str(args)
 
+db_settings.read(options.dbconfig)
 
+db_host = db_settings.get('Database','Host')
+db_username = db_settings.get('Database','Username')
+db_password = db_settings.get('Database','Password')
+db_database = db_settings.get('Database','Database')
 
+if DEBUG:
+    print 'DB_HOST: ' + str(db_host)
+    print 'DB_Username: ' + str(db_username)
+    print 'DB_Password: ' + str(db_password)
+    print 'DB_Database: ' + str(db_database)
 
 def get_cpu_temperature():
         process = Popen (['vcgencmd', 'measure_temp'], stdout=PIPE)
@@ -206,10 +221,10 @@ def render_motion_event(draw,target_size_width,target_size_height,target_center_
 def pull_event_list():
     gc.collect()
 
-    db = MySQLdb.connect(host="localhost", # your host, usually localhost
-                     user="username", # your username
-                     passwd="password", # your password
-                     db="motion_sql") # name of the data base
+    db = MySQLdb.connect(host=db_host, # your host, usually localhost
+                     user=db_username, # your username
+                     passwd=db_password, # your password
+                     db=db_database) # name of the data base
 
 
     cur = db.cursor()
