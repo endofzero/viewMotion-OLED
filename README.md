@@ -22,7 +22,7 @@ apt-get screen
 TODO:
 
 * Run as a daemon instead
-
+* Dynamic Image sizes for motion capture (currently just 640x480)
 
 # Usage
 
@@ -52,3 +52,10 @@ Options:
                         
                         Location of the Database config file for the MySQL credentials (default: db_config.ini)
 
+
+# Information
+
+Motion SQL query
+			sql_query insert into security(camera, event_number, filename, frame, file_type, changed_pixels, noise_level, motion_width, motion_height, motion_x, motion_y, time_stamp, event_time_stamp) values('%t', '%v', '%f', '%q', '%n', '%D', '%N', '%i', '%J', '%K', '%L', '%Y-%m-%d %T', '%C')
+
+Based on a 640 x 480 image
