@@ -23,6 +23,7 @@ TODO:
 
 * Run as a daemon instead
 * Dynamic Image sizes for motion capture (currently just 640x480)
+* 2019-05-04 - Burn-in still occurs after a few years of use, enable the option for a button to turn on the screen. The screen would be off by default until the button press
 
 # Usage
 
